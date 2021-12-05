@@ -1,7 +1,11 @@
+import java.util.List;
+
 public class Controller {
     private int id;
     private UTDGalaxy galaxy;
     private RestaurantDB restaurantDB;
+
+    private CustomerRecord userCurrentOrdering = null; // DCD?
 
     public Controller() {
         id = 1; // make random ig
@@ -9,11 +13,18 @@ public class Controller {
         restaurantDB = new RestaurantDB();
     }
 
-    public int logIn(String email, String password) { // update DCD with type
-        return galaxy.validateLogIn(email, password);
+    public List<Restaurant> logIn(String email, String password) { // update DCD with type
+        int userId = galaxy.validateLogIn(email, password);
+        if(userId == -1) return null;
+        userCurrentOrdering = galaxy.getRecord(userId);
+        return restaurantDB.getRestaurantList();
     }
 
-    public Restaurant viewRestaurant(int id) { // update DCD with type
+    public String viewRestaurant(int id) { // update DCD with type
         return restaurantDB.getRestaurantInfo(id);
+    }
+
+    public void finalizeRestaurant(int id) {
+        restaurantDB.getMenu(id);
     }
 }

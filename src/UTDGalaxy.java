@@ -2,26 +2,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UTDGalaxy {
-    List<String> customers; // change type to CustomerRecord class
+    List<CustomerRecord> customers;
 
     public UTDGalaxy() {
-        customers = new ArrayList<>();
-        customers.add("Sarah");
+        customers = new ArrayList<CustomerRecord>();
+        customers.add(new CustomerRecord("Sarah Jane", 1, "sxj@utdallas.edu", "password", 2035244567));
+        customers.add(new CustomerRecord("Matt Smith", 2, "mms@utdallas.edu", "password", 2145244333));
+        customers.add(new CustomerRecord("Test User", 3, "test", "test", 2145242939));
     }
 
     public int validateLogIn(String email, String password) {
-        for (String customer : customers) {
-            if (customer.equals(email) && customer.equals(password)) { // add .getEmail() etc.
-                return 0; // replace
-                //return customers.get(i).getId();
+        for (CustomerRecord customer : customers) {
+            if (customer.getEmail().equals(email) && customer.getPassword().equals(password)) {
+                return customer.getId();
             }
         }
         return -1;
     }
 
-    public String getRecord(int id) { // replace type with CustomerRecord
-        for (String customer : customers) {
-            if (customer.equals(id)) { // .getId
+    public CustomerRecord getRecord(int id) {
+        for (CustomerRecord customer : customers) {
+            if (customer.getId() == id) {
                 return customer;
             }
         }

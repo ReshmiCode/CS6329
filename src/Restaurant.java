@@ -3,12 +3,14 @@ public class Restaurant {
     private int menuId;
     private String name;
     private long waitTime; // update DCD
+    private String desc; // update DCD
 
-    public Restaurant(int id, int menuId, String name, long waitTime) {
+    public Restaurant(int id, int menuId, String name, long waitTime, String desc) {
         this.id = id;
         this.menuId = menuId;
         this.name = name;
         this.waitTime = waitTime;
+        this.desc = desc;
     }
 
     public int getId() {
@@ -37,6 +39,10 @@ public class Restaurant {
 
     public long getWaitTime() {
         return this.waitTime;
+    }
+
+    public String getDesc() {
+        return this.desc;
     }
 
     public void displayWaitTime() {
