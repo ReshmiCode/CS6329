@@ -1,11 +1,13 @@
+import java.util.List;
+
 public class Menu {
-    private int id; // add to DCD
-    private String menu;
+    private int id; // add to DCD and remove menu string
+    List<MenuItem> menuItems;
     private int restaurantId;
 
-    public Menu(int menuId, String menu, float price, int restaurantId) {
+    public Menu(int menuId, List<MenuItem> menuItems, float price, int restaurantId) {
         this.id = menuId;
-        this.menu = menu;
+        this.menuItems = menuItems;
         this.restaurantId = restaurantId;
     }
 
@@ -17,12 +19,12 @@ public class Menu {
         this.id = menuId;
     }
 
-    public String getMenu() {
-        return this.menu;
+    public List<MenuItem> getMenu() {
+        return this.menuItems;
     }
 
-    public void setMenu(String menu) {
-        this.menu = menu;
+    public void setMenu(List<MenuItem> menuItems) {
+        this.menuItems = menuItems;
     }
 
     public int getRestaurantId() {
