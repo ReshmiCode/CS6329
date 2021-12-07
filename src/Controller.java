@@ -5,6 +5,7 @@ public class Controller {
     private UTDGalaxy galaxy;
     private RestaurantDB restaurantDB;
 
+    private Order currentOrder;
     private CustomerRecord userCurrentOrdering = null; // DCD?
 
     public Controller() {
@@ -24,7 +25,21 @@ public class Controller {
         return restaurantDB.getRestaurantInfo(id);
     }
 
-    public void finalizeRestaurant(int id) {
-        restaurantDB.getMenu(id);
+    public Menu finalizeRestaurant(int id) { // update DCD
+        Menu menu = restaurantDB.getMenu(id);
+        currentOrder = new Order(userCurrentOrdering.getId(), id);
+        return menu;
+    }
+
+    public Order addItem(int id, int quantity) { // update DCD
+        MenuItem item = restaurantDB.getMenuItemDetails(id);
+        currentOrder.addOrderItem(item.getName(), item.getPrice(), quantity);
+        return currentOrder;
+    }
+
+    public void finalizeOrder() {
+        double price = currentOrder.getTotalPrice();
+        Bill bill = currentOrder.createBill(price);
+        long waitTime = restaurantDB.getWaitTime(currentOrder.getRestaurantId()); // update UC realization
     }
 }

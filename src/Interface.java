@@ -34,8 +34,20 @@ public class Interface {
             System.out.println(controller.viewRestaurant(choice));
         }
 
-        controller.finalizeRestaurant(choice);
+        Menu menu = controller.finalizeRestaurant(choice);
+        System.out.println(menu);
+        choice = 0;
+        int quantity = 0;
+        while(choice != -1) {
+            System.out.println("What is the ID of the item you want to add to your order?");
+            choice = reader.nextInt();
+            System.out.println("How many of this item would you like to add to your order?");
+            quantity = reader.nextInt();
+            if(choice == -1) break;
+            System.out.println(controller.addItem(choice, quantity));
+        }
 
+        controller.finalizeOrder();
 
         reader.close();
     }

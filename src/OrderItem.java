@@ -13,7 +13,7 @@ public class OrderItem
 
 	public double getPrice()
 	{
-		return price;
+		return price*quantity;
 	}
 	public void setPrice(Double price)
 	{

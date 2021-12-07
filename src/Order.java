@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -6,20 +7,29 @@ public class Order {
     private long timeStamp;
     private double price;
     private boolean isPaidFor;
-    List<String> orderItems; // replace with OrderItem class
+    List<OrderItem> orderItems; // replace with OrderItem class
     private long waitingTime;
     private int customerId;
 
-    public Order addOrderItem(String name, double price, int quantity) {
-        // create Order
-        orderItems.add("hi");
-        return this;
+    public Order(int customerId, int restaurantId) {
+        this.customerId = customerId;
+        this.restaurantId = restaurantId;
+        isPaidFor = false;
+        orderItems = new ArrayList<>();
+        waitingTime = -1;
+        price = 0;
+        id = 1;
+    }
+
+    public void addOrderItem(String name, double price, int quantity) { // update DCD
+        OrderItem curr = new OrderItem(name, price, quantity);
+        orderItems.add(curr);
     }
 
     public double getTotalPrice() {
         double price = 0;
-        for(String item: orderItems) {
-            price += 0; // item.getPrice()
+        for(OrderItem item: orderItems) {
+            price += item.getPrice();
         }
         this.price = price;
         return price;
@@ -32,6 +42,8 @@ public class Order {
     public long getWaitTime() {
         return waitingTime;
     }
+
+    public int getRestaurantId() {return restaurantId;}
 
     public void makePayment(String creditCard) {
         Payment made = new Payment(price, id, true, creditCard);
