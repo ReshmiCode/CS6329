@@ -21,6 +21,15 @@ public class Order {
         id = 1;
     }
 
+    public String toString() {
+        String res = "Order:\n";
+        for(OrderItem items : orderItems) {
+            res += items.toString();
+            res += "\n";
+        }
+        return res;
+    }
+
     public void addOrderItem(String name, double price, int quantity) { // update DCD
         OrderItem curr = new OrderItem(name, price, quantity);
         orderItems.add(curr);

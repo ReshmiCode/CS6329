@@ -12,6 +12,10 @@ public class Bill
 		date = new Date();
 	}
 
+	public String toString() {
+		return "Amount due: $" + String.format("%1.2f", amount) + " on " + date.toString();
+	}
+
 	public Double getAmount()
 	{
 		return amount;

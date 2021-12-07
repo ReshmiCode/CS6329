@@ -5,10 +5,19 @@ public class Menu {
     List<MenuItem> menuItems;
     private int restaurantId;
 
-    public Menu(int menuId, List<MenuItem> menuItems, float price, int restaurantId) {
+    public Menu(int menuId, List<MenuItem> menuItems, int restaurantId) {
         this.id = menuId;
         this.menuItems = menuItems;
         this.restaurantId = restaurantId;
+    }
+
+    public String toString() {
+        String res = "";
+        for(MenuItem item: menuItems) {
+            res += item.toString();
+            res += "\n";
+        }
+        return res;
     }
 
     public int getMenuId() {

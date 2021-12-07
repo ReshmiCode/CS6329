@@ -4,6 +4,7 @@ public class Controller {
     private int id;
     private UTDGalaxy galaxy;
     private RestaurantDB restaurantDB;
+    private Payment_Service paymentService;
 
     private Order currentOrder;
     private CustomerRecord userCurrentOrdering = null; // DCD?
@@ -12,6 +13,7 @@ public class Controller {
         id = 1; // make random ig
         galaxy = new UTDGalaxy();
         restaurantDB = new RestaurantDB();
+        paymentService = new Payment_Service();
     }
 
     public List<Restaurant> logIn(String email, String password) { // update DCD with type
@@ -33,13 +35,25 @@ public class Controller {
 
     public Order addItem(int id, int quantity) { // update DCD
         MenuItem item = restaurantDB.getMenuItemDetails(id);
+        if(item == null) return null;
         currentOrder.addOrderItem(item.getName(), item.getPrice(), quantity);
         return currentOrder;
     }
 
-    public void finalizeOrder() {
+    public String[] finalizeOrder() { // update DCD
         double price = currentOrder.getTotalPrice();
         Bill bill = currentOrder.createBill(price);
-        long waitTime = restaurantDB.getWaitTime(currentOrder.getRestaurantId()); // update UC realization
+        int waitTime = restaurantDB.getWaitTime(currentOrder.getRestaurantId()); // update UC realization
+
+        String [] tuple = new String[2];
+        tuple[1] = bill.toString();
+        tuple[0] = "Wait time: " + waitTime + " minutes";
+        return tuple;
+    }
+
+    public boolean makePayment(String creditCardInfo) { // update DCD
+        if(!paymentService.isValid(creditCardInfo)) return false;
+        currentOrder.makePayment(creditCardInfo);
+        return true;
     }
 }

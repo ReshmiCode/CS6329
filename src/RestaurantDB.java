@@ -19,7 +19,7 @@ public class RestaurantDB {
     public String getRestaurantInfo(int id) { // update DCD
         for(Restaurant restaurant:restaurantList) {
             if(restaurant.getId() == id) {
-                return restaurant.getDesc();
+                return restaurant.getName() + ": " + restaurant.getDesc();
             }
         }
         return null;
@@ -38,7 +38,7 @@ public class RestaurantDB {
         return menuDB.getMenuItem(id);
     }
 
-    public long getWaitTime(int id) { // update DCD with type
+    public int getWaitTime(int id) { // update DCD with type
         for(Restaurant restaurant:restaurantList) {
             if(restaurant.getId() == id) {
                 return restaurant.getWaitTime();

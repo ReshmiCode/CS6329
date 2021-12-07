@@ -11,6 +11,10 @@ public class OrderItem
 		this.quantity = quantity;
 	}
 
+	public String toString() {
+		return name + "\t" + quantity;
+	}
+
 	public double getPrice()
 	{
 		return price*quantity;
