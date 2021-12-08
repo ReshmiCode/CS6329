@@ -16,31 +16,31 @@ public class Controller {
         paymentService = new Payment_Service();
     }
 
-    public List<Restaurant> logIn(String email, String password) { // update DCD with type
+    public List<Restaurant> logIn(String email, String password) {
         int userId = galaxy.validateLogIn(email, password);
         if(userId == -1) return null;
         userCurrentOrdering = galaxy.getRecord(userId);
         return restaurantDB.getRestaurantList();
     }
 
-    public String viewRestaurant(int id) { // update DCD with type
+    public String viewRestaurant(int id) {
         return restaurantDB.getRestaurantInfo(id);
     }
 
-    public Menu finalizeRestaurant(int id) { // update DCD
+    public Menu finalizeRestaurant(int id) {
         Menu menu = restaurantDB.getMenu(id);
         currentOrder = new Order(userCurrentOrdering.getId(), id);
         return menu;
     }
 
-    public Order addItem(int id, int quantity) { // update DCD
+    public Order addItem(int id, int quantity) {
         MenuItem item = restaurantDB.getMenuItemDetails(id);
         if(item == null) return null;
         currentOrder.addOrderItem(item.getName(), item.getPrice(), quantity);
         return currentOrder;
     }
 
-    public String[] finalizeOrder() { // update DCD
+    public String[] finalizeOrder() {
         double price = currentOrder.getTotalPrice();
         Bill bill = currentOrder.createBill(price);
         int waitTime = restaurantDB.getWaitTime(currentOrder.getRestaurantId()); // update UC realization
@@ -51,7 +51,7 @@ public class Controller {
         return tuple;
     }
 
-    public boolean makePayment(String creditCardInfo) { // update DCD
+    public boolean makePayment(String creditCardInfo) {
         if(!paymentService.isValid(creditCardInfo)) return false;
         currentOrder.makePayment(creditCardInfo);
         return true;

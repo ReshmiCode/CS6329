@@ -2,7 +2,7 @@
 public class MenuItem {
 	private int id;
 	private String name;
-	private double price; // update DCD
+	private double price;
 
 	public MenuItem(int menuId, String name, double price) {
 		this.id =menuId;

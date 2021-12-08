@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Menu {
-    private int id; // add to DCD and remove menu string
+    private int id;
     List<MenuItem> menuItems;
     private int restaurantId;
 
@@ -18,6 +18,13 @@ public class Menu {
             res += "\n";
         }
         return res;
+    }
+
+    public MenuItem getMenuItem(int id) {
+        for(MenuItem item: menuItems) {
+            if (item.getId() == id) return item;
+        }
+        return null;
     }
 
     public int getMenuId() {

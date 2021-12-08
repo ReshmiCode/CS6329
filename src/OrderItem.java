@@ -17,7 +17,7 @@ public class OrderItem
 
 	public double getPrice()
 	{
-		return price*quantity;
+		return price;
 	}
 	public void setPrice(Double price)
 	{

@@ -1,9 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Restaurant {
     private int id;
     private int menuId;
     private String name;
-    private int waitTime; // update DCD
-    private String desc; // update DCD
+    private int waitTime;
+    private String desc;
+    private List<Order> orders;
 
     public Restaurant(int id, int menuId, String name, int waitTime, String desc) {
         this.id = id;
@@ -11,6 +15,11 @@ public class Restaurant {
         this.name = name;
         this.waitTime = waitTime;
         this.desc = desc;
+        orders = new ArrayList<>();
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
     }
 
     public int getId() {

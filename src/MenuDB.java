@@ -32,9 +32,7 @@ public class MenuDB {
 
     public MenuItem getMenuItem (int id){
         for(Menu menu: menuList) {
-            for(MenuItem menuItem: menu.getMenu()) {
-                if(menuItem.getId() == id) return menuItem;
-            }
+            if(menu.getMenuItem(id) != null) return menu.getMenuItem(id);
         }
         return null;
     }

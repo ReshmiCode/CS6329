@@ -1,14 +1,15 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
     private int id;
     private int restaurantId;
-    private long timeStamp;
+    private Date timeStamp;
     private double price;
     private boolean isPaidFor;
-    List<OrderItem> orderItems; // replace with OrderItem class
-    private long waitingTime;
+    List<OrderItem> orderItems;
+    private int waitingTime;
     private int customerId;
 
     public Order(int customerId, int restaurantId) {
@@ -19,6 +20,7 @@ public class Order {
         waitingTime = -1;
         price = 0;
         id = 1;
+        timeStamp = new Date();
     }
 
     public String toString() {
@@ -30,7 +32,7 @@ public class Order {
         return res;
     }
 
-    public void addOrderItem(String name, double price, int quantity) { // update DCD
+    public void addOrderItem(String name, double price, int quantity) {
         OrderItem curr = new OrderItem(name, price, quantity);
         orderItems.add(curr);
     }
@@ -38,7 +40,7 @@ public class Order {
     public double getTotalPrice() {
         double price = 0;
         for(OrderItem item: orderItems) {
-            price += item.getPrice();
+            price += item.getPrice()*item.getQuantity();
         }
         this.price = price;
         return price;
@@ -56,5 +58,6 @@ public class Order {
 
     public void makePayment(String creditCard) {
         Payment made = new Payment(price, id, true, creditCard);
+        isPaidFor = true;
     }
 }

@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantDB {
-    List<Restaurant> restaurantList;
-    MenuDB menuDB;
+    private List<Restaurant> restaurantList;
+    private MenuDB menuDB;
 
     public RestaurantDB() {
         menuDB = new MenuDB();
@@ -16,7 +16,7 @@ public class RestaurantDB {
         return restaurantList;
     }
 
-    public String getRestaurantInfo(int id) { // update DCD
+    public String getRestaurantInfo(int id) {
         for(Restaurant restaurant:restaurantList) {
             if(restaurant.getId() == id) {
                 return restaurant.getName() + ": " + restaurant.getDesc();
@@ -25,7 +25,7 @@ public class RestaurantDB {
         return null;
     }
 
-    public Menu getMenu(int id) { // update DCD with type
+    public Menu getMenu(int id) {
         for(Restaurant restaurant:restaurantList) {
             if(restaurant.getMenuId() == id) {
                 return menuDB.getMenu(restaurant.getMenuId());
@@ -38,7 +38,7 @@ public class RestaurantDB {
         return menuDB.getMenuItem(id);
     }
 
-    public int getWaitTime(int id) { // update DCD with type
+    public int getWaitTime(int id) {
         for(Restaurant restaurant:restaurantList) {
             if(restaurant.getId() == id) {
                 return restaurant.getWaitTime();
@@ -47,5 +47,13 @@ public class RestaurantDB {
         return 0;
     }
 
+    public void addOrder(Order order) {
+        for(Restaurant restaurant:restaurantList) {
+            if(restaurant.getId() == order.getRestaurantId()) {
+                restaurant.addOrder(order);
+                return;
+            }
+        }
+    }
 
 }
